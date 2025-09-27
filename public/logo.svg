@@ -1,118 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 2000 1700">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: url(#gradient1);
-      }
-
-      .cls-2 {
-        fill: url(#gradient2);
-      }
-
-      .cls-3 {
-        fill: url(#gradient3);
-      }
-      
-      .glow {
-        filter: url(#glow-filter);
-      }
-      
-      .pulse {
-        animation: pulse 2s ease-in-out infinite;
-      }
-      
-      @keyframes pulse {
-        0%, 100% { opacity: 0.4; }
-        50% { opacity: 1; }
-      }
-      
-      @keyframes shimmer {
-        0% { transform: translateX(-200%); }
-        100% { transform: translateX(200%); }
-      }
-      
-      .shimmer {
-        animation: shimmer 3s ease-in-out infinite;
-      }
-    </style>
-    
-  <!-- Glow filter -->
-    <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge> 
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-  <!-- Animated gradients -->
-    <linearGradient id="gradient1" x1="531.58" y1="-4.02" x2="531.58" y2="1661.41" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#070606">
-        <animate attributeName="stop-color" values="#070606;#5a5a5a;#070606" dur="1.8s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset=".37" stop-color="#1b1b1b">
-        <animate attributeName="stop-color" values="#1b1b1b;#888888;#1b1b1b" dur="1.8s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="1" stop-color="#3b3b3b">
-        <animate attributeName="stop-color" values="#3b3b3b;#cccccc;#3b3b3b" dur="1.8s" repeatCount="indefinite"/>
-      </stop>
-    </linearGradient>
-    
-    <linearGradient id="gradient2" x1="1000" y1="-4.02" x2="1000" y2="1661.41" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#070606">
-        <animate attributeName="stop-color" values="#070606;#5a5a5a;#070606" dur="1.8s" repeatCount="indefinite" begin="0.6s"/>
-      </stop>
-      <stop offset=".37" stop-color="#1b1b1b">
-        <animate attributeName="stop-color" values="#1b1b1b;#888888;#1b1b1b" dur="1.8s" repeatCount="indefinite" begin="0.6s"/>
-      </stop>
-      <stop offset="1" stop-color="#3b3b3b">
-        <animate attributeName="stop-color" values="#3b3b3b;#cccccc;#3b3b3b" dur="1.8s" repeatCount="indefinite" begin="0.6s"/>
-      </stop>
-    </linearGradient>
-    
-    <linearGradient id="gradient3" x1="1462.04" y1="-4.02" x2="1462.04" y2="1661.41" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#070606">
-        <animate attributeName="stop-color" values="#070606;#5a5a5a;#070606" dur="1.8s" repeatCount="indefinite" begin="1.2s"/>
-      </stop>
-      <stop offset=".37" stop-color="#1b1b1b">
-        <animate attributeName="stop-color" values="#1b1b1b;#888888;#1b1b1b" dur="1.8s" repeatCount="indefinite" begin="1.2s"/>
-      </stop>
-      <stop offset="1" stop-color="#3b3b3b">
-        <animate attributeName="stop-color" values="#3b3b3b;#cccccc;#3b3b3b" dur="1.8s" repeatCount="indefinite" begin="1.2s"/>
-      </stop>
-    </linearGradient>
-    
-  <!-- Halo gradient -->
-    <radialGradient id="glow-gradient" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
-      <stop offset="70%" stop-color="#888888" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    
-  <!-- Shine effect -->
-    <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="45%" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
-      <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    
-  <!-- Clip paths -->
-    <clipPath id="shape-clip">
-      <polygon points="1008.73 0 827.29 251.03 54.43 251.03 235.74 0 1008.73 0"/>
-      <polygon points="1937.79 1449.1 1756.47 1700 986.3 1700 1167.48 1449.1 1937.79 1449.1"/>
-      <polygon points="2000 0 771.98 1700 0 1700 1228.02 0 2000 0"/>
-    </clipPath>
-  </defs>
-  
-  <g class="glow breathe">
-    <g class="pulse wave-effect">
-  <!-- Main geometric shapes -->
-      <polygon class="cls-1" points="1008.73 0 827.29 251.03 54.43 251.03 235.74 0 1008.73 0"/>
-      <polygon class="cls-3" points="1937.79 1449.1 1756.47 1700 986.3 1700 1167.48 1449.1 1937.79 1449.1"/>
-      <polygon class="cls-2" points="2000 0 771.98 1700 0 1700 1228.02 0 2000 0"/>
-    </g>
-  </g>
+<svg width="159" height="157" viewBox="0 0 159 157" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M79 0L124.033 93.75H33.9667L79 0Z" fill="url(#paint0_linear_54_16)"/>
+<path d="M72.472 143.903L59.3719 71.3189L15.1561 92.3223L72.472 143.903Z" fill="url(#paint1_linear_54_16)"/>
+<path d="M72.472 143.903L59.3719 71.3189L38.9973 81L42.8215 96.5L72.472 143.903Z" fill="url(#paint2_linear_54_16)"/>
+<path d="M79 0L124.033 93.75H79V0Z" fill="url(#paint3_linear_54_16)"/>
+<path d="M85.7885 143.903L99.0222 71.3189L143.689 92.3223L85.7885 143.903Z" fill="url(#paint4_linear_54_16)"/>
+<path d="M85.7885 143.903L99.0222 71.3189L119.605 81L115.742 96.5L85.7885 143.903Z" fill="url(#paint5_linear_54_16)"/>
+<defs>
+<linearGradient id="paint0_linear_54_16" x1="79" y1="0" x2="79" y2="95" gradientUnits="userSpaceOnUse">
+<stop stop-color="#101010"/>
+<stop offset="1" stop-color="#272626"/>
+</linearGradient>
+<linearGradient id="paint1_linear_54_16" x1="25.528" y1="61.1264" x2="28.0986" y2="128.686" gradientUnits="userSpaceOnUse">
+<stop offset="0.0337711" stop-color="#101010"/>
+<stop offset="1" stop-color="#272626"/>
+</linearGradient>
+<linearGradient id="paint2_linear_54_16" x1="69.5" y1="142" x2="40.9769" y2="65.7638" gradientUnits="userSpaceOnUse">
+<stop offset="0.298077" stop-color="#101010"/>
+<stop offset="0.961538" stop-color="#272626"/>
+</linearGradient>
+<linearGradient id="paint3_linear_54_16" x1="61.5" y1="91" x2="101" y2="44.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#101010"/>
+<stop offset="1" stop-color="#272626"/>
+</linearGradient>
+<linearGradient id="paint4_linear_54_16" x1="133.211" y1="61.1264" x2="130.667" y2="128.688" gradientUnits="userSpaceOnUse">
+<stop offset="0.0337711" stop-color="#101010"/>
+<stop offset="1" stop-color="#272626"/>
+</linearGradient>
+<linearGradient id="paint5_linear_54_16" x1="77.5" y1="115.5" x2="127.124" y2="52.7488" gradientUnits="userSpaceOnUse">
+<stop stop-color="#101010"/>
+<stop offset="0.929197" stop-color="#272626"/>
+</linearGradient>
+</defs>
 </svg>

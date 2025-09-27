@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { rootMetadata } from "@/lib/seo/metadata";
 import { GlobalJsonLd } from "@/lib/seo/jsonld";
+import { getSeoConfig } from "@/lib/seo/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +19,9 @@ const geistMono = Geist_Mono({
 });
 export const metadata: Metadata = rootMetadata();
 
+export const viewport: Viewport = {
+  themeColor: getSeoConfig().themeColor || "#000000",
+};
 
 export default function RootLayout({
   children,
@@ -26,6 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" sizes="any" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900`}
       >

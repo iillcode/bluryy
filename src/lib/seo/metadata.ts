@@ -95,7 +95,7 @@ export const rootMetadata = (): Metadata => {
       template: `%s | ${cfg.siteName}`,
     },
     description: cfg.siteDescription,
-    themeColor: cfg.themeColor,
+    // themeColor moved to viewport export to fix Next.js 14 warning
     openGraph: {
       title: cfg.siteName,
       description: cfg.siteDescription,

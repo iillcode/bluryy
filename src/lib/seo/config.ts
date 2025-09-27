@@ -50,10 +50,10 @@ export const defaultSeoConfig = (): SiteSEOConfig => {
     locale: "en_US",
     themeColor: "#000000",
     twitterHandle: "@yourbrand",
-    defaultOgImage: "/next.svg", // Replace with a PNG in /public for better sharing previews
+    defaultOgImage: "/logo.svg",
     company: {
       name: app.app_details.name,
-      logoUrl: "/next.svg",
+      logoUrl: "/logo.svg",
     },
     robots: {
       index:
