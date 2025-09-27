@@ -94,12 +94,24 @@ export default function RunderHome() {
 
   // Ensure canvas is properly initialized when image is set
   useEffect(() => {
-    if (image && originalImageRef.current) {
-      // Redraw image on canvas when image state changes
-      const timer = setTimeout(() => {
-        drawImageOnCanvas(originalImageRef.current!);
-      }, 100);
-      return () => clearTimeout(timer);
+    if (image) {
+      // If we have the original image reference, use it
+      if (originalImageRef.current) {
+        // Redraw image on canvas when image state changes
+        const timer = setTimeout(() => {
+          drawImageOnCanvas(originalImageRef.current!);
+        }, 50);
+        return () => clearTimeout(timer);
+      } else {
+        // If we don't have the original image reference yet, 
+        // create it from the image data
+        const img = new Image();
+        img.onload = () => {
+          originalImageRef.current = img;
+          drawImageOnCanvas(img);
+        };
+        img.src = image;
+      }
     }
   }, [image]);
 
@@ -118,18 +130,15 @@ export default function RunderHome() {
         const imageData = e.target?.result as string;
         const img = new Image();
         img.onload = () => {
-          // Set the image state first
-          setImage(imageData);
-          // Store original image reference
+          // Store original image reference first
           originalImageRef.current = img;
+          // Set the image state second
+          setImage(imageData);
           // Initialize history with the original image
           setHistory([imageData]);
           setHistoryIndex(0);
-          // Draw on canvas with a slight delay to ensure state is updated
-          setTimeout(() => {
-            drawImageOnCanvas(img);
-            setIsUploading(false);
-          }, 100);
+          // The useEffect will handle drawing the image on canvas
+          setIsUploading(false);
         };
         img.onerror = () => {
           console.error("Failed to load image");
