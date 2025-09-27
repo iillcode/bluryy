@@ -103,7 +103,7 @@ export default function RunderHome() {
         }, 50);
         return () => clearTimeout(timer);
       } else {
-        // If we don't have the original image reference yet, 
+        // If we don't have the original image reference yet,
         // create it from the image data
         const img = new Image();
         img.onload = () => {
@@ -529,31 +529,118 @@ export default function RunderHome() {
   const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
     e.preventDefault(); // Prevent scrolling while drawing
     if (e.touches.length > 0) {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
       const touch = e.touches[0];
-      const mouseEvent = new MouseEvent("mousedown", {
-        clientX: touch.clientX,
-        clientY: touch.clientY,
-      });
-      handleMouseDown(mouseEvent as any);
+
+      // Calculate coordinates the same way as in handleMouseDown
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      const x = (touch.clientX - rect.left) * scaleX;
+      const y = (touch.clientY - rect.top) * scaleY;
+
+      if (blurMode.value === "square") {
+        // For square blur, set the starting point
+        setSquareStart({ x, y });
+      } else if (blurMode.value === "erase") {
+        // For erase mode, start drawing
+        setIsDrawing(true);
+        // Create a synthetic mouse event for drawErase
+        const syntheticEvent = {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          currentTarget: canvas,
+        } as unknown as React.MouseEvent<HTMLCanvasElement>;
+        drawErase(syntheticEvent);
+      } else {
+        // For normal blur, start drawing
+        setIsDrawing(true);
+        // Create a synthetic mouse event for drawBlur
+        const syntheticEvent = {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          currentTarget: canvas,
+        } as unknown as React.MouseEvent<HTMLCanvasElement>;
+        drawBlur(syntheticEvent);
+      }
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
     e.preventDefault(); // Prevent scrolling while drawing
     if (e.touches.length > 0) {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
       const touch = e.touches[0];
-      const mouseEvent = new MouseEvent("mousemove", {
-        clientX: touch.clientX,
-        clientY: touch.clientY,
-      });
-      handleMouseMove(mouseEvent as any);
+
+      // Calculate coordinates the same way as in handleMouseMove
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      const x = (touch.clientX - rect.left) * scaleX;
+      const y = (touch.clientY - rect.top) * scaleY;
+
+      if (blurMode.value === "square" && squareStart) {
+        // For square blur, track current touch position for preview
+        setCurrentMousePos({ x, y });
+      } else if (isDrawing) {
+        // Create a synthetic mouse event for drawing functions
+        const syntheticEvent = {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          currentTarget: canvas,
+        } as unknown as React.MouseEvent<HTMLCanvasElement>;
+
+        if (blurMode.value === "erase") {
+          drawErase(syntheticEvent);
+        } else {
+          // For normal blur, continue drawing
+          drawBlur(syntheticEvent);
+        }
+      }
     }
   };
 
   const handleTouchEnd = (e: React.TouchEvent<HTMLCanvasElement>) => {
     e.preventDefault();
-    const mouseEvent = new MouseEvent("mouseup", {});
-    handleMouseUp(mouseEvent as any);
+
+    if (blurMode.value === "square" && squareStart) {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      // For square blur, we need to get the end coordinates
+      const rect = canvas.getBoundingClientRect();
+
+      // Use the last touch position if available, otherwise use the start position
+      let endX = squareStart.x;
+      let endY = squareStart.y;
+
+      if (currentMousePos) {
+        endX = currentMousePos.x;
+        endY = currentMousePos.y;
+      }
+
+      // Create a synthetic mouse event with the end coordinates
+      const syntheticEvent = {
+        clientX: (endX / canvas.width) * rect.width + rect.left,
+        clientY: (endY / canvas.height) * rect.height + rect.top,
+        currentTarget: canvas,
+      } as unknown as React.MouseEvent<HTMLCanvasElement>;
+
+      // Draw the square blur
+      drawSquareBlur(syntheticEvent);
+      setSquareStart(null);
+      setCurrentMousePos(null);
+    } else if (isDrawing) {
+      // For normal or erase blur, save to history after drawing is completed
+      setIsDrawing(false);
+      saveToHistory();
+    }
   };
 
   return (
