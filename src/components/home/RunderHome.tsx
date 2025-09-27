@@ -530,7 +530,7 @@ export default function RunderHome() {
     // Prevent scrolling and other touch actions
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (e.touches.length > 0) {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -576,7 +576,7 @@ export default function RunderHome() {
     // Prevent scrolling and other touch actions
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (e.touches.length > 0) {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -767,18 +767,24 @@ export default function RunderHome() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[300px] sm:min-h-[500px] flex items-center justify-center" style={{ touchAction: 'none', overflow: 'hidden' }}>
+                <div
+                  className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[300px] sm:min-h-[500px] flex items-center justify-center"
+                  style={{ touchAction: "none", overflow: "hidden" }}
+                >
                   {isUploading ? (
                     <div className="text-center">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
                       <p className="text-gray-600">Loading image...</p>
                     </div>
                   ) : image ? (
-                    <div className="relative w-full flex items-center justify-center" style={{ touchAction: 'none' }}>
+                    <div
+                      className="relative w-full flex items-center justify-center"
+                      style={{ touchAction: "none" }}
+                    >
                       <div
                         ref={canvasContainerRef}
                         className="relative inline-block"
-                        style={{ touchAction: 'none' }}
+                        style={{ touchAction: "none" }}
                       >
                         <canvas
                           ref={canvasRef}
@@ -789,7 +795,7 @@ export default function RunderHome() {
                               ? "cursor-grab"
                               : "cursor-crosshair"
                           }`}
-                          style={{ touchAction: 'none' }}
+                          style={{ touchAction: "none" }}
                           onMouseDown={handleMouseDown}
                           onMouseMove={handleMouseMove}
                           onMouseUp={handleMouseUp}
